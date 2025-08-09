@@ -58,5 +58,27 @@
     &copy; 2025 Groupe Intellectys – Démo Agentforce
   </footer>
 
+
+  <script type='text/javascript'>
+	function initEmbeddedMessaging() {
+		try {
+			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+
+			embeddedservice_bootstrap.init(
+				'00Dfj000003dvj3',
+				'Web_Messaging',
+				'https://orgfarm-8a6a1492ec-dev-ed.develop.my.site.com/ESWWebMessaging1754691052196',
+				{
+					scrt2URL: 'https://orgfarm-8a6a1492ec-dev-ed.develop.my.salesforce-scrt.com'
+				}
+			);
+		} catch (err) {
+			console.error('Error loading Embedded Messaging: ', err);
+		}
+	};
+</script>
+<script type='text/javascript' src='https://orgfarm-8a6a1492ec-dev-ed.develop.my.site.com/ESWWebMessaging1754691052196/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
+
 </body>
 </html>
