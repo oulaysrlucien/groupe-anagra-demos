@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact – GROUPE ANAGRA</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body{font-family:sans-serif;margin:0}
+    header,footer{background:#001b36;color:#fff;padding:1rem;text-align:center}
+    main{max-width:720px;margin:2rem auto;padding:0 1rem}
+    label{display:block;margin:.75rem 0 .25rem}
+    input,select,button{width:100%;padding:.65rem;border:1px solid #ccc;border-radius:6px}
+    .row{display:grid;gap:1rem;grid-template-columns:1fr 1fr}
+    .hint{font-size:.9rem;color:#444}
+    button{background:#0b5fff;color:#fff;border:none;margin-top:1rem;cursor:pointer}
+    button:hover{opacity:.9}
+    .legal{font-size:.85rem;color:#444;margin-top:.5rem}
+    /* Champ honeypot (anti-spam basique si pas de reCAPTCHA) */
+    .hp{position:absolute;left:-5000px;top:auto;width:1px;height:1px;overflow:hidden}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Nous contacter</h1>
+  </header>
+
+  <main>
+    <p class="hint">Remplissez ce formulaire — un conseiller vous répondra rapidement.</p>
+
+    <!-- ====== Web-to-Lead (POC) ====== -->
+    <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DgL00000BBAAe" method="POST">
+      <!-- Obligatoire SF -->
+      <input type="hidden" name="oid" value="00DgL00000BBAAe">
+      <input type="hidden" name="retURL" value="https://oulaysrlucien.github.io/groupe-anagra-demos/merci.html">
+      <input type="hidden" name="use_default_assignment_rule" value="1">
+      <input type="hidden" name="lead_source" value="Web">
+
+      <!-- Anti-spam simple si pas de reCAPTCHA -->
+      <div class="hp">
+        <label>Ne pas remplir :</label>
+        <input type="text" name="website_homepage" autocomplete="off">
+      </div>
+
+      <div class="row">
+        <div>
+          <label for="first_name">Prénom *</label>
+          <input id="first_name" name="first_name" type="text" required>
+        </div>
+        <div>
+          <label for="last_name">Nom *</label>
+          <input id="last_name" name="last_name" type="text" required>
+        </div>
+      </div>
+
+      <label for="company">Société *</label>
+      <input id="company" name="company" type="text" required>
+
+      <label for="email">Email *</label>
+      <input id="email" name="email" type="email" required>
+
+      <div class="row">
+        <div>
+          <label for="Sector__c">Secteur *</label>
+          <select id="Sector__c" name="Sector__c" required>
+            <option value="">-- Sélectionner --</option>
+            <option>Automobile</option><option>Banque de détail</option>
+            <option>Retail e-commerce</option><option>Manufacturing</option>
+            <option>Software</option>
+          </select>
+        </div>
+        <div>
+          <label for="Region__c">Région *</label>
+          <select id="Region__c" name="Region__c" required>
+            <option value="">-- Sélectionner --</option>
+            <option>Île-de-France</option><option>Sud-Ouest</option>
+            <option>Nord</option><option>Sud-Est</option><option>Ouest</option>
+          </select>
+        </div>
+      </div>
+
+      <label for="SLA_Priority__c">Priorité SLA *</label>
+      <select id="SLA_Priority__c" name="SLA_Priority__c" required>
+        <option value="">-- Sélectionner --</option>
+        <option>P1</option><option>P2</option><option>P3</option>
+      </select>
+
+      <label for="Use_Case_Interest__c">Intérêt (optionnel)</label>
+      <select id="Use_Case_Interest__c" name="Use_Case_Interest__c">
+        <option value="">-- Optionnel --</option>
+        <option>Qualification des leads</option>
+        <option>Briefing rendez-vous</option>
+        <option>Compte-rendu automatisé</option>
+      </select>
+
+      <label><input type="checkbox" name="GDPR_OptIn__c"> J’accepte d’être recontacté(e) (RGPD)</label>
+      <p class="legal">En soumettant ce formulaire, vous acceptez notre politique de confidentialité.</p>
+
+      <button type="submit">Envoyer</button>
+    </form>
+
+    <!-- ====== Version AVEC reCAPTCHA v2 (décommente si activé dans Setup) ======
+    <form ... le même, et ajoute juste :
+      <div class="g-recaptcha" data-sitekey="TA_CLE_SITE_ICI"></div>
+      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    -->
+  </main>
+
+  <footer>
+    &copy; 2025 ANAGRA TESTING. Tous droits réservés.
+  </footer>
+</body>
+</html>
