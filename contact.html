@@ -196,15 +196,18 @@
             </select>
           </div>
           <div>
-            <label for="Projet_Description__c">Besoin / Description projet <span class="req">*</span></label>
-            <!-- sur desktop, on laisse en simple input pour conserver l’alignement; le textarea complet est en dessous -->
-            <input id="Projet_Description__c" name="Projet_Description__c" type="text" placeholder="2–3 phrases sur le besoin" required>
+            <label for="Role__c">Rôle dans l’entreprise <span class="req">*</span></label>
+              <input id="Role__c" name="Role__c" type="text" placeholder="Exemple : Directeur Marketing" required>
           </div>
         </div>
 
         <!-- Zone texte large (optionnelle si vous préférez) -->
+        <!--
         <label for="Projet_Description__c_long" class="sr-only" aria-hidden="true" style="position:absolute;left:-9999px">Description détaillée</label>
         <textarea id="Projet_Description__c_long" name="Projet_Description__c" placeholder="(Facultatif) Détails supplémentaires…"></textarea>
+        -->
+        <textarea id="Projet_Description__c" name="Projet_Description__c" 
+         placeholder="Décrivez brièvement votre projet, vos objectifs et votre contexte…" required></textarea>
 
         <div class="actions">
           <button class="btn" type="submit">Envoyer ma demande</button>
