@@ -1,135 +1,217 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Contact — Web-to-Lead</title>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact | LORYSTECH</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; padding: 0; background:#f7f9fc;}
-    header, footer { background:#001b36; color:#fff; padding:1rem; text-align:center; }
-    main { max-width: 760px; margin: 2rem auto; background:#fff; padding:2rem; border-radius:12px; box-shadow: 0 6px 20px rgba(0,0,0,.06); }
-    h1 { margin-top:0; font-size:1.6rem; }
-    .row { display:flex; gap:1rem; }
-    .row > .field { flex:1; }
-    label { display:block; margin:.75rem 0 .35rem; font-weight:600; }
-    input, select, textarea { width:100%; padding:.7rem .8rem; border:1px solid #d6d9e0; border-radius:8px; font-size:1rem; }
-    textarea { min-height: 120px; resize: vertical; }
-    .hint { color:#667085; font-size:.9rem; margin-top:.2rem; }
-    .actions { margin-top: 1.25rem; }
-    button { background:#0b5cab; color:#fff; border:none; padding:.9rem 1.2rem; border-radius:8px; font-weight:700; cursor:pointer; }
-    button:hover { background:#084c90; }
-    .req { color:#e02424; margin-left:.25rem; }
+    :root{
+      --bg:#0f172a;         /* slate-900 */
+      --panel:#0b1225;      /* dark variant */
+      --card:#ffffff;       /* form card */
+      --text:#0f172a;       /* body text */
+      --muted:#64748b;      /* slate-500 */
+      --brand:#2563eb;      /* primary */
+      --brand-600:#1d4ed8;
+      --ring: 0 0 0 4px rgba(37, 99, 235, .15);
+      --radius: 16px;
+      --shadow: 0 10px 30px rgba(2,6,23,.25);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background: radial-gradient(1200px 600px at 20% 20%, #112042 0%, var(--bg) 55%, #0a0f1f 100%);
+      color:#fff;
+    }
+    /* Shell */
+    .wrap{
+      min-height:100%;
+      display:grid;
+      grid-template-columns: 1fr minmax(420px, 520px);
+      gap:48px;
+      align-items:stretch;
+      padding:64px clamp(24px,4vw,64px);
+    }
+    /* Left hero (copy & features) */
+    .hero{
+      display:flex; flex-direction:column; justify-content:center;
+      max-width:780px;
+    }
+    .badge{
+      display:inline-flex; gap:8px; align-items:center;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.15);
+      color:#e2e8f0; padding:6px 10px; border-radius:999px; font-size:12px;
+      width:max-content;
+    }
+    h1{
+      margin:18px 0 10px; font-size: clamp(28px, 4.2vw, 44px); line-height:1.1; letter-spacing:-0.02em;
+    }
+    .lead{
+      color:#cbd5e1; margin:0 0 28px; max-width:56ch; font-size:clamp(15px,1.3vw,18px);
+    }
+    .bullets{display:grid; gap:14px; margin-top:12px}
+    .bullets li{list-style:none; display:flex; gap:10px; align-items:flex-start; color:#cbd5e1}
+    .bullets svg{flex:0 0 auto}
+    /* Right column: the card fixed to the right */
+    .card{
+      background:var(--card); color:var(--text);
+      border-radius:var(--radius); box-shadow:var(--shadow);
+      padding:28px; align-self:center;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; margin-bottom:6px;
+      color:var(--muted); font-size:14px; font-weight:600; letter-spacing:.02em;
+      text-transform:uppercase;
+    }
+    .card h2{margin:6px 0 14px; font-size:22px}
+    .hint{color:var(--muted); margin:0 0 18px; font-size:14px}
+    form{display:grid; gap:14px}
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    label{display:block; font-size:13px; color:#334155; margin:0 0 6px; font-weight:600}
+    input, select, textarea{
+      width:100%; padding:12px 14px; border:1px solid #e2e8f0; border-radius:12px;
+      font:inherit; color:var(--text); background:#fff; outline:0; transition:.18s;
+    }
+    input:focus, select:focus, textarea:focus{border-color:var(--brand); box-shadow:var(--ring)}
+    textarea{min-height:120px; resize:vertical}
+    .req{color:#ef4444}
+    .actions{display:flex; gap:10px; align-items:center; margin-top:6px}
+    .btn{
+      appearance:none; border:0; background:var(--brand); color:#fff;
+      padding:12px 16px; border-radius:12px; font-weight:600; cursor:pointer;
+      transition:.18s;
+    }
+    .btn:hover{background:var(--brand-600)}
+    .subtle{color:var(--muted); font-size:12px}
+    /* Honeypot (hidden) */
+    .hp{position:absolute; left:-5000px; top:auto; width:1px; height:1px; overflow:hidden}
+    /* Responsive */
+    @media (max-width: 980px){
+      .wrap{grid-template-columns:1fr; gap:28px; padding:36px 20px}
+      .card{max-width:640px; justify-self:end}
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Nous contacter</h1>
-  </header>
+  <main class="wrap">
+    <!-- Colonne gauche : message marketing -->
+    <section class="hero" aria-label="Présentation">
+      <span class="badge">Prise de contact • RDV sous 24h</span>
+      <h1>Parlez-nous de votre projet</h1>
+      <p class="lead">
+        Décrivez vos objectifs, votre contexte et vos contraintes. Notre équipe vous recontacte rapidement
+        avec des premières recommandations et une proposition de créneau pour un échange.
+      </p>
+      <ul class="bullets" role="list">
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#22c55e" aria-hidden="true"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          Réponse confirmée instantanément par email.
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#22c55e" aria-hidden="true"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          Qualification automatique de votre besoin pour préparer le RDV.
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#22c55e" aria-hidden="true"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          Données hébergées et traitées de façon conforme (RGPD).
+        </li>
+      </ul>
+    </section>
 
-  <main>
-    <!-- Web-to-Lead Salesforce -->
-    <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DgL00000BBAAe" method="POST">
+    <!-- Colonne droite : carte du formulaire (alignée à droite) -->
+    <aside class="card" aria-label="Formulaire de contact">
+      <div class="brand">LORYSTECH • Contact</div>
+      <h2>Demander un échange</h2>
+      <p class="hint">Tous les champs marqués <span class="req">*</span> sont obligatoires.</p>
 
-      <!-- Hidden Salesforce plumbing -->
-      <input type="hidden" name="oid" value="00DgL00000BBAAe" />
-      <!-- URL vers laquelle rediriger après soumission -->
-      <input type="hidden" name="retURL" value="https://oulaysrlucien.github.io/groupe-anagra-demos/merci.html" />
-      <!-- Utiliser l'Assignment Rule active -->
-      <input type="hidden" name="use_default_assignment_rule" value="1" />
-      <!-- DEBUG (à activer ponctuellement si besoin)
-      <input type="hidden" name="debug" value="1" />
-      <input type="hidden" name="debugEmail" value="votre.email@test.com" />
-      -->
+      <!-- SFDC Web-to-Lead -->
+      <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" novalidate>
+        <!-- Hidden Salesforce -->
+        <input type="hidden" name="oid" value="00DgL00000BBAAe">
+        <input type="hidden" name="retURL" value="https://oulaysrlucien.github.io/groupe-anagra-demos/merci.html">
+        <input type="hidden" name="LeadSource" value="Web">
 
-      <!-- Identité -->
-      <div class="row">
-        <div class="field">
-          <label for="first_name">Prénom<span class="req">*</span></label>
-          <input id="first_name" name="first_name" type="text" maxlength="40" required />
+        <!-- Honeypot anti-bot -->
+        <div class="hp">
+          <label>Si vous êtes humain, laissez ce champ vide</label>
+          <input type="text" name="website">
         </div>
-        <div class="field">
-          <label for="last_name">Nom<span class="req">*</span></label>
-          <input id="last_name" name="last_name" type="text" maxlength="80" required />
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="field">
-          <label for="company">Société<span class="req">*</span></label>
-          <input id="company" name="company" type="text" maxlength="255" required />
+        <div class="row">
+          <div>
+            <label for="first_name">Prénom <span class="req">*</span></label>
+            <input id="first_name" name="first_name" type="text" autocomplete="given-name" required>
+          </div>
+          <div>
+            <label for="last_name">Nom <span class="req">*</span></label>
+            <input id="last_name" name="last_name" type="text" autocomplete="family-name" required>
+          </div>
         </div>
-        <div class="field">
-          <label for="email">Email<span class="req">*</span></label>
-          <input id="email" name="email" type="email" maxlength="80" required />
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="field">
-          <label for="phone">Téléphone<span class="req">*</span></label>
-          <input id="phone" name="phone" type="tel" maxlength="40" required />
-          <div class="hint">Ex. +33 6 12 34 56 78</div>
+        <div class="row">
+          <div>
+            <label for="company">Société <span class="req">*</span></label>
+            <input id="company" name="company" type="text" required>
+          </div>
+          <div>
+            <label for="email">Email <span class="req">*</span></label>
+            <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required>
+          </div>
         </div>
-        <div class="field">
-          <label for="Sector__c">Secteur</label>
-          <select id="Sector__c" name="Sector__c">
-            <option value="">-- Sélectionner --</option>
-            <option>Automobile</option>
-            <option>Banque</option>
-            <option>Assurance</option>
-            <option>Retail / E-commerce</option>
-            <option>Santé</option>
-            <option>Énergie</option>
-            <option>Logistique</option>
-            <option>Pharma</option>
-            <option>Grande distribution</option>
-            <option>Technologie</option>
-            <option>Autre</option>
-          </select>
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="field">
-          <label for="Country__c">Pays<span class="req">*</span></label>
-          <select id="Country__c" name="Country__c" required>
-            <option value="">-- Sélectionner --</option>
-            <option>France</option>
-            <option>Belgique</option>
-            <option>Suisse</option>
-            <option>Luxembourg</option>
-            <option>Canada</option>
-            <option>États-Unis</option>
-            <option>Royaume-Uni</option>
-            <option>Allemagne</option>
-            <option>Espagne</option>
-            <option>Italie</option>
-            <option>Autre</option>
-          </select>
+        <div class="row">
+          <div>
+            <label for="phone">Téléphone</label>
+            <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel">
+          </div>
+          <div>
+            <label for="Country__c">Pays <span class="req">*</span></label>
+            <select id="Country__c" name="Country__c" required>
+              <option value="" selected disabled>Choisissez…</option>
+              <option>France</option>
+              <option>Belgique</option>
+              <option>Suisse</option>
+              <option>Luxembourg</option>
+              <option>Canada</option>
+              <option>Autre</option>
+            </select>
+          </div>
         </div>
-        <div class="field">
-          <label for="Projet_Description__c">Besoin / Description projet<span class="req">*</span></label>
-             <textarea id="Projet_Description__c" name="Projet_Description__c" rows="5" maxlength="32000" required
-             placeholder="Décrivez brièvement votre projet, vos objectifs et votre contexte..."></textarea>
+
+        <div class="row">
+          <div>
+            <label for="Sector__c">Secteur <span class="req">*</span></label>
+            <select id="Sector__c" name="Sector__c" required>
+              <option value="" selected disabled>Choisissez…</option>
+              <option>Banque</option>
+              <option>Retail</option>
+              <option>Automobile</option>
+              <option>Santé</option>
+              <option>Industrie</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div>
+            <label for="Projet_Description__c">Besoin / Description projet <span class="req">*</span></label>
+            <!-- sur desktop, on laisse en simple input pour conserver l’alignement; le textarea complet est en dessous -->
+            <input id="Projet_Description__c" name="Projet_Description__c" type="text" placeholder="2–3 phrases sur le besoin" required>
+          </div>
         </div>
-      </div>
 
-      <!-- (Option) consentement RGPD — décommentez si vous avez le champ custom -->
-      <!--
-      <label>
-        <input type="checkbox" name="GDPR_OptIn__c" value="true" />
-        J’accepte d’être recontacté(e) et la politique de confidentialité.
-      </label>
-      -->
+        <!-- Zone texte large (optionnelle si vous préférez) -->
+        <label for="Projet_Description__c_long" class="sr-only" aria-hidden="true" style="position:absolute;left:-9999px">Description détaillée</label>
+        <textarea id="Projet_Description__c_long" name="Projet_Description__c" placeholder="(Facultatif) Détails supplémentaires…"></textarea>
 
-      <div class="actions">
-        <button type="submit">Envoyer ma demande</button>
-      </div>
-    </form>
+        <div class="actions">
+          <button class="btn" type="submit">Envoyer ma demande</button>
+          <span class="subtle">Réponse sous 24h ouvrées</span>
+        </div>
+      </form>
+    </aside>
   </main>
-
-  <footer>
-    &copy; 2025 GROUPE ANAGRA — Tous droits réservés.
-  </footer>
 </body>
 </html>
