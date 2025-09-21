@@ -206,8 +206,11 @@
         <label for="Projet_Description__c_long" class="sr-only" aria-hidden="true" style="position:absolute;left:-9999px">Description détaillée</label>
         <textarea id="Projet_Description__c_long" name="Projet_Description__c" placeholder="(Facultatif) Détails supplémentaires…"></textarea>
         -->
-        <textarea id="Projet_Description__c" name="Projet_Description__c" 
-         placeholder="Décrivez brièvement votre projet, vos objectifs et votre contexte…" required></textarea>
+        <div class="field full">
+            <textarea id="Projet_Description__c" name="Projet_Description__c" required
+              placeholder="Décrivez brièvement votre projet, vos objectifs et votre contexte…"></textarea>
+            <div class="hint">Quelques lignes suffisent. Vous pourrez préciser lors de l’échange.</div>
+          </div>
 
         <div class="actions">
           <button class="btn" type="submit">Envoyer ma demande</button>
