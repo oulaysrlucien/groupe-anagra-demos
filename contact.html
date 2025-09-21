@@ -206,11 +206,24 @@
         <label for="Projet_Description__c_long" class="sr-only" aria-hidden="true" style="position:absolute;left:-9999px">Description détaillée</label>
         <textarea id="Projet_Description__c_long" name="Projet_Description__c" placeholder="(Facultatif) Détails supplémentaires…"></textarea>
         -->
+        <!--
         <div class="field full">
             <textarea id="Projet_Description__c" name="Projet_Description__c" required
               placeholder="Décrivez brièvement votre projet, vos objectifs et votre contexte…"></textarea>
             <div class="hint">Quelques lignes suffisent. Vous pourrez préciser lors de l’échange.</div>
           </div>
+        -->
+          <div class="field full">
+            <!-- Projet_Description__c : OBLIGATOIRE (déclenche le Flow) -->
+            <label for="Projet_Description__c">Votre projet <span class="required-star">*</span> 
+              <span class="required-badge">(obligatoire)</span>
+            </label>
+            <textarea id="Projet_Description__c" name="Projet_Description__c" rows="6" maxlength="32000" required aria-required="true"
+              placeholder="Décrivez brièvement votre projet, vos objectifs et votre contexte…"></textarea>
+            <div class="error" id="err_project">Veuillez décrire brièvement votre projet.</div>
+            <!--<div class="hint">Ce champ est obligatoire : il nous permet de qualifier votre besoin et déclenche la préparation automatique du rendez-vous.</div>-->
+        </div>
+        
 
         <div class="actions">
           <button class="btn" type="submit">Envoyer ma demande</button>
