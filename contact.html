@@ -9,7 +9,6 @@
   <style>
     :root{
       --bg:#0f172a;
-      --panel:#0b1225;
       --card:#ffffff;
       --text:#0f172a;
       --muted:#64748b;
@@ -18,7 +17,8 @@
       --ring: 0 0 0 4px rgba(37,99,235,.15);
       --radius: 16px;
       --shadow: 0 10px 30px rgba(2,6,23,.25);
-      --maxW: 1200px;         /* largeur max du contenu */
+      --maxW: 1200px;
+      --gap: 56px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -27,6 +27,7 @@
       background: radial-gradient(1200px 600px at 20% 20%, #112042 0%, var(--bg) 55%, #0a0f1f 100%);
       color:#fff;
     }
+
     /* Lien Retour accueil */
     .home-link{
       display:inline-block; margin:16px clamp(16px,4vw,64px) 0;
@@ -34,22 +35,23 @@
     }
     .home-link:hover{color:#fff; text-decoration:underline}
 
-    /* Conteneur + grille bornée et centrée */
+    /* Grille robuste avec zones nommées */
     .wrap{
       min-height:calc(100vh - 80px);
       max-width:var(--maxW);
       margin:0 auto;
       padding:16px clamp(24px,4vw,64px) 64px;
       display:grid;
-      grid-template-columns: minmax(480px, 680px) minmax(360px, 520px); /* ← bornes */
-      gap:48px;
-      align-items:center;   /* ← centrage vertical des 2 colonnes */
+      grid-template-columns: minmax(460px, 680px) minmax(360px, 520px);
+      grid-template-areas: "card hero";
+      gap:var(--gap);
+      align-items:center;         /* centrage vertical des deux colonnes */
       justify-content:center;
     }
 
     /* Colonne texte (droite) */
     .hero{
-      grid-column: 2;
+      grid-area: hero;
       max-width:520px;
       align-self:center;
     }
@@ -60,19 +62,19 @@
       color:#e2e8f0; padding:6px 10px; border-radius:999px; font-size:12px;
       width:max-content;
     }
-    h1{ margin:18px 0 10px; font-size: clamp(28px, 4.2vw, 44px); line-height:1.1; letter-spacing:-0.02em; }
-    .lead{ color:#cbd5e1; margin:0 0 28px; font-size:clamp(15px,1.3vw,18px); }
+    h1{margin:18px 0 10px; font-size: clamp(28px, 4.2vw, 44px); line-height:1.1; letter-spacing:-0.02em;}
+    .lead{color:#cbd5e1; margin:0 0 28px; font-size:clamp(15px,1.3vw,18px);}
     .bullets{display:grid; gap:14px; margin-top:12px}
     .bullets li{list-style:none; display:flex; gap:10px; align-items:flex-start; color:#cbd5e1}
     .bullets svg{flex:0 0 auto}
 
     /* Carte formulaire (gauche) */
     .card{
-      grid-column: 1;
+      grid-area: card;
       background:var(--card); color:var(--text);
       border-radius:var(--radius); box-shadow:var(--shadow);
       padding:28px;
-      max-width:680px;   /* ← empêche l’étirement */
+      max-width:680px;
       width:100%;
       justify-self:start;
     }
@@ -105,10 +107,12 @@
     @media (max-width: 980px){
       .wrap{
         grid-template-columns:1fr;
+        grid-template-areas:
+          "card"
+          "hero";
         gap:28px; padding:36px 20px;
       }
-      .card,.hero{grid-column:auto; justify-self:stretch; max-width:100%}
-      /* ordre : form puis texte */
+      .card,.hero{max-width:100%; justify-self:stretch}
     }
   </style>
 </head>
@@ -118,30 +122,6 @@
   <a class="home-link" href="index.html">← Retour à l’accueil</a>
 
   <main class="wrap">
-    <!-- Texte à droite -->
-    <section class="hero" aria-label="Présentation">
-      <span class="badge">Prise de contact • RDV sous 24h</span>
-      <h1>Parlez-nous de votre projet</h1>
-      <p class="lead">
-        Décrivez vos objectifs, votre contexte et vos contraintes. Notre équipe vous recontacte rapidement
-        avec des premières recommandations et une proposition de créneau pour un échange.
-      </p>
-      <ul class="bullets" role="list">
-        <li>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#22c55e" aria-hidden="true"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-          Réponse confirmée instantanément par email.
-        </li>
-        <li>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#22c55e" aria-hidden="true"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-          Qualification automatique de votre besoin pour préparer le RDV.
-        </li>
-        <li>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#22c55e" aria-hidden="true"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-          Données hébergées et traitées de façon conforme (RGPD).
-        </li>
-      </ul>
-    </section>
-
     <!-- Formulaire à gauche -->
     <aside class="card" aria-label="Formulaire de contact">
       <div class="brand">ANAGRA • Contact</div>
@@ -228,9 +208,33 @@
         </div>
       </form>
     </aside>
+
+    <!-- Texte à droite -->
+    <section class="hero" aria-label="Présentation">
+      <span class="badge">Prise de contact • RDV sous 24h</span>
+      <h1>Parlez-nous de votre projet</h1>
+      <p class="lead">
+        Décrivez vos objectifs, votre contexte et vos contraintes. Notre équipe vous recontacte rapidement
+        avec des premières recommandations et une proposition de créneau pour un échange.
+      </p>
+      <ul class="bullets" role="list">
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#22c55e" aria-hidden="true"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          Réponse confirmée instantanément par email.
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#22c55e" aria-hidden="true"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          Qualification automatique de votre besoin pour préparer le RDV.
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#22c55e" aria-hidden="true"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          Données hébergées et traitées de façon conforme (RGPD).
+        </li>
+      </ul>
+    </section>
   </main>
 
-  <!-- Chat Code Snippet (collez exactement celui de votre org) -->
+  <!-- Chat Code Snippet (gardez exactement vos valeurs) -->
   <script type='text/javascript'>
     function initEmbeddedMessaging() {
       try {
