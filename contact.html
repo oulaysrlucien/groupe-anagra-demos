@@ -26,6 +26,13 @@
       background: radial-gradient(1200px 600px at 20% 20%, #112042 0%, var(--bg) 55%, #0a0f1f 100%);
       color:#fff;
     }
+    /* Lien Retour accueil */
+    .home-link{
+      display:inline-block; margin:16px clamp(16px,4vw,64px) 0;
+      color:#cbd5e1; text-decoration:none; font-weight:600;
+    }
+    .home-link:hover{color:#fff; text-decoration:underline}
+
     /* Shell */
     .wrap{
       min-height:100%;
@@ -33,12 +40,14 @@
       grid-template-columns: 1fr minmax(420px, 520px);
       gap:48px;
       align-items:stretch;
-      padding:64px clamp(24px,4vw,64px);
+      padding:16px clamp(24px,4vw,64px) 64px;
     }
-    /* Left hero (copy & features) */
+    /* Texte / features */
     .hero{
       display:flex; flex-direction:column; justify-content:center;
       max-width:780px;
+      /* >>> Changement : le texte passe à droite (colonne 2) */
+      grid-column: 2;
     }
     .badge{
       display:inline-flex; gap:8px; align-items:center;
@@ -56,11 +65,13 @@
     .bullets{display:grid; gap:14px; margin-top:12px}
     .bullets li{list-style:none; display:flex; gap:10px; align-items:flex-start; color:#cbd5e1}
     .bullets svg{flex:0 0 auto}
-    /* Right column: the card fixed to the right */
+    /* Carte formulaire */
     .card{
       background:var(--card); color:var(--text);
       border-radius:var(--radius); box-shadow:var(--shadow);
       padding:28px; align-self:center;
+      /* >>> Changement : la carte passe à gauche (colonne 1) */
+      grid-column: 1;
     }
     .brand{
       display:flex; align-items:center; gap:10px; margin-bottom:6px;
@@ -86,19 +97,24 @@
       transition:.18s;
     }
     .btn:hover{background:var(--brand-600)}
+    .btn.secondary{background:#e2e8f0; color:#0f172a}
+    .btn.secondary:hover{background:#dbe3ef}
     .subtle{color:var(--muted); font-size:12px}
-    /* Honeypot (hidden) */
     .hp{position:absolute; left:-5000px; top:auto; width:1px; height:1px; overflow:hidden}
-    /* Responsive */
     @media (max-width: 980px){
       .wrap{grid-template-columns:1fr; gap:28px; padding:36px 20px}
-      .card{max-width:640px; justify-self:end}
+      .card{max-width:640px; justify-self:end; grid-column:auto}
+      .hero{grid-column:auto}
     }
   </style>
 </head>
 <body>
+
+  <!-- >>> Ajout : lien Retour à l’accueil -->
+  <a class="home-link" href="index.html">← Retour à l’accueil</a>
+
   <main class="wrap">
-    <!-- Colonne gauche : message marketing -->
+    <!-- Colonne texte (désormais à droite grâce à grid-column:2) -->
     <section class="hero" aria-label="Présentation">
       <span class="badge">Prise de contact • RDV sous 24h</span>
       <h1>Parlez-nous de votre projet</h1>
@@ -122,7 +138,7 @@
       </ul>
     </section>
 
-    <!-- Colonne droite : carte du formulaire (alignée à droite) -->
+    <!-- Carte formulaire (désormais affichée à gauche grâce à grid-column:1) -->
     <aside class="card" aria-label="Formulaire de contact">
       <div class="brand">ANAGRA • Contact</div>
       <h2>Demander un échange</h2>
@@ -201,74 +217,43 @@
           </div>
         </div>
 
-        <!-- Zone texte large (optionnelle si vous préférez) -->
-        <!--
-        <label for="Projet_Description__c_long" class="sr-only" aria-hidden="true" style="position:absolute;left:-9999px">Description détaillée</label>
-        <textarea id="Projet_Description__c_long" name="Projet_Description__c" placeholder="(Facultatif) Détails supplémentaires…"></textarea>
-        -->
-        <!--
         <div class="field full">
-            <textarea id="Projet_Description__c" name="Projet_Description__c" required
-              placeholder="Décrivez brièvement votre projet, vos objectifs et votre contexte…"></textarea>
-            <div class="hint">Quelques lignes suffisent. Vous pourrez préciser lors de l’échange.</div>
-          </div>
-        -->
-          <div class="field full">
-            <!-- Projet_Description__c : OBLIGATOIRE (déclenche le Flow) -->
-            <label for="Projet_Description__c">Votre projet <span class="required-star">*</span> 
-              <span class="required-badge">(obligatoire)</span>
-            </label>
-            <textarea id="Projet_Description__c" name="Projet_Description__c" rows="6" maxlength="32000" required aria-required="true"
-              placeholder="Décrivez brièvement votre projet, vos objectifs et votre contexte…"></textarea>
-            <div class="error" id="err_project">Veuillez décrire brièvement votre projet.</div>
-            <!--<div class="hint">Ce champ est obligatoire : il nous permet de qualifier votre besoin et déclenche la préparation automatique du rendez-vous.</div>-->
+          <!-- Projet_Description__c : OBLIGATOIRE (déclenche le Flow) -->
+          <label for="Projet_Description__c">Votre projet <span class="required-star">*</span>
+            <span class="required-badge">(obligatoire)</span>
+          </label>
+          <textarea id="Projet_Description__c" name="Projet_Description__c" rows="6" maxlength="32000" required aria-required="true"
+            placeholder="Décrivez brièvement votre projet, vos objectifs et votre contexte…"></textarea>
+          <div class="error" id="err_project">Veuillez décrire brièvement votre projet.</div>
         </div>
-        
-        <!--
-        <div class="actions">
-          <button class="btn" type="submit">Envoyer ma demande</button>
-          <span class="subtle">Réponse sous 24h ouvrées</span>
-        </div>
-        -->
-            <div class="actions">
-                <button class="btn primary" type="submit">Envoyer ma demande</button>
-                <button class="btn secondary" type="reset">Effacer</button>
-                <div class="success" id="successMsg" role="status" aria-live="polite">Merci ! Envoi en cours…</div>
-            </div>
 
-        
+        <div class="actions">
+          <button class="btn primary" type="submit">Envoyer ma demande</button>
+          <button class="btn secondary" type="reset">Effacer</button>
+        </div>
       </form>
     </aside>
   </main>
 
-
-
   <!--  Chat Code Snippet - DEBUT  -->
-
-	<script type='text/javascript'>
-	function initEmbeddedMessaging() {
-		try {
-			embeddedservice_bootstrap.settings.language = 'fr'; // For example, enter 'en' or 'en-US'
-
-			embeddedservice_bootstrap.init(
-				'00DgL00000BBAAe',
-				'Web_Messaging_Custom',
-				'https://orgfarm-ab4c8353cf-dev-ed.develop.my.site.com/ESWWebMessagingCustom1758535912617',
-				{
-					scrt2URL: 'https://orgfarm-ab4c8353cf-dev-ed.develop.my.salesforce-scrt.com'
-				}
-			);
-		} catch (err) {
-			console.error('Error loading Embedded Messaging: ', err);
-		}
-	};
-</script>
-<script type='text/javascript' src='https://orgfarm-ab4c8353cf-dev-ed.develop.my.site.com/ESWWebMessagingCustom1758535912617/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
-	
-<!-- FIN -  Chat Code Snippet   -->
-
-
-
-  
+  <script type='text/javascript'>
+    function initEmbeddedMessaging() {
+      try {
+        embeddedservice_bootstrap.settings.language = 'fr'; // For example, enter 'en' or 'en-US'
+        embeddedservice_bootstrap.init(
+          '00DgL00000BBAAe',
+          'Web_Messaging_Custom',
+          'https://orgfarm-ab4c8353cf-dev-ed.develop.my.site.com/ESWWebMessagingCustom1758535912617',
+          {
+            scrt2URL: 'https://orgfarm-ab4c8353cf-dev-ed.develop.my.salesforce-scrt.com'
+          }
+        );
+      } catch (err) {
+        console.error('Error loading Embedded Messaging: ', err);
+      }
+    };
+  </script>
+  <script type='text/javascript' src='https://orgfarm-ab4c8353cf-dev-ed.develop.my.site.com/ESWWebMessagingCustom1758535912617/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+  <!-- FIN -  Chat Code Snippet   -->
 </body>
 </html>
