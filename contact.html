@@ -8,16 +8,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0f172a;         /* slate-900 */
-      --panel:#0b1225;      /* dark variant */
-      --card:#ffffff;       /* form card */
-      --text:#0f172a;       /* body text */
-      --muted:#64748b;      /* slate-500 */
-      --brand:#2563eb;      /* primary */
+      --bg:#0f172a;
+      --panel:#0b1225;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --brand:#2563eb;
       --brand-600:#1d4ed8;
-      --ring: 0 0 0 4px rgba(37, 99, 235, .15);
+      --ring: 0 0 0 4px rgba(37,99,235,.15);
       --radius: 16px;
       --shadow: 0 10px 30px rgba(2,6,23,.25);
+      --maxW: 1200px;         /* largeur max du contenu */
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -33,21 +34,24 @@
     }
     .home-link:hover{color:#fff; text-decoration:underline}
 
-    /* Shell */
+    /* Conteneur + grille bornée et centrée */
     .wrap{
-      min-height:100%;
-      display:grid;
-      grid-template-columns: 1fr minmax(420px, 520px);
-      gap:48px;
-      align-items:stretch;
+      min-height:calc(100vh - 80px);
+      max-width:var(--maxW);
+      margin:0 auto;
       padding:16px clamp(24px,4vw,64px) 64px;
+      display:grid;
+      grid-template-columns: minmax(480px, 680px) minmax(360px, 520px); /* ← bornes */
+      gap:48px;
+      align-items:center;   /* ← centrage vertical des 2 colonnes */
+      justify-content:center;
     }
-    /* Texte / features */
+
+    /* Colonne texte (droite) */
     .hero{
-      display:flex; flex-direction:column; justify-content:center;
-      max-width:780px;
-      /* >>> Changement : le texte passe à droite (colonne 2) */
       grid-column: 2;
+      max-width:520px;
+      align-self:center;
     }
     .badge{
       display:inline-flex; gap:8px; align-items:center;
@@ -56,30 +60,29 @@
       color:#e2e8f0; padding:6px 10px; border-radius:999px; font-size:12px;
       width:max-content;
     }
-    h1{
-      margin:18px 0 10px; font-size: clamp(28px, 4.2vw, 44px); line-height:1.1; letter-spacing:-0.02em;
-    }
-    .lead{
-      color:#cbd5e1; margin:0 0 28px; max-width:56ch; font-size:clamp(15px,1.3vw,18px);
-    }
+    h1{ margin:18px 0 10px; font-size: clamp(28px, 4.2vw, 44px); line-height:1.1; letter-spacing:-0.02em; }
+    .lead{ color:#cbd5e1; margin:0 0 28px; font-size:clamp(15px,1.3vw,18px); }
     .bullets{display:grid; gap:14px; margin-top:12px}
     .bullets li{list-style:none; display:flex; gap:10px; align-items:flex-start; color:#cbd5e1}
     .bullets svg{flex:0 0 auto}
-    /* Carte formulaire */
+
+    /* Carte formulaire (gauche) */
     .card{
+      grid-column: 1;
       background:var(--card); color:var(--text);
       border-radius:var(--radius); box-shadow:var(--shadow);
-      padding:28px; align-self:center;
-      /* >>> Changement : la carte passe à gauche (colonne 1) */
-      grid-column: 1;
+      padding:28px;
+      max-width:680px;   /* ← empêche l’étirement */
+      width:100%;
+      justify-self:start;
     }
     .brand{
       display:flex; align-items:center; gap:10px; margin-bottom:6px;
-      color:var(--muted); font-size:14px; font-weight:600; letter-spacing:.02em;
-      text-transform:uppercase;
+      color:var(--muted); font-size:14px; font-weight:600; letter-spacing:.02em; text-transform:uppercase;
     }
     .card h2{margin:6px 0 14px; font-size:22px}
     .hint{color:var(--muted); margin:0 0 18px; font-size:14px}
+
     form{display:grid; gap:14px}
     .row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
     label{display:block; font-size:13px; color:#334155; margin:0 0 6px; font-weight:600}
@@ -93,28 +96,29 @@
     .actions{display:flex; gap:10px; align-items:center; margin-top:6px}
     .btn{
       appearance:none; border:0; background:var(--brand); color:#fff;
-      padding:12px 16px; border-radius:12px; font-weight:600; cursor:pointer;
-      transition:.18s;
+      padding:12px 16px; border-radius:12px; font-weight:600; cursor:pointer; transition:.18s;
     }
     .btn:hover{background:var(--brand-600)}
     .btn.secondary{background:#e2e8f0; color:#0f172a}
     .btn.secondary:hover{background:#dbe3ef}
-    .subtle{color:var(--muted); font-size:12px}
-    .hp{position:absolute; left:-5000px; top:auto; width:1px; height:1px; overflow:hidden}
+
     @media (max-width: 980px){
-      .wrap{grid-template-columns:1fr; gap:28px; padding:36px 20px}
-      .card{max-width:640px; justify-self:end; grid-column:auto}
-      .hero{grid-column:auto}
+      .wrap{
+        grid-template-columns:1fr;
+        gap:28px; padding:36px 20px;
+      }
+      .card,.hero{grid-column:auto; justify-self:stretch; max-width:100%}
+      /* ordre : form puis texte */
     }
   </style>
 </head>
 <body>
 
-  <!-- >>> Ajout : lien Retour à l’accueil -->
+  <!-- Lien Retour à l’accueil -->
   <a class="home-link" href="index.html">← Retour à l’accueil</a>
 
   <main class="wrap">
-    <!-- Colonne texte (désormais à droite grâce à grid-column:2) -->
+    <!-- Texte à droite -->
     <section class="hero" aria-label="Présentation">
       <span class="badge">Prise de contact • RDV sous 24h</span>
       <h1>Parlez-nous de votre projet</h1>
@@ -138,24 +142,18 @@
       </ul>
     </section>
 
-    <!-- Carte formulaire (désormais affichée à gauche grâce à grid-column:1) -->
+    <!-- Formulaire à gauche -->
     <aside class="card" aria-label="Formulaire de contact">
       <div class="brand">ANAGRA • Contact</div>
       <h2>Demander un échange</h2>
       <p class="hint">Tous les champs marqués <span class="req">*</span> sont obligatoires.</p>
 
-      <!-- SFDC Web-to-Lead -->
+      <!-- Web-to-Lead Salesforce -->
       <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" novalidate>
-        <!-- Hidden Salesforce -->
+        <!-- Hidden SFDC -->
         <input type="hidden" name="oid" value="00DgL00000BBAAe">
         <input type="hidden" name="retURL" value="https://oulaysrlucien.github.io/groupe-anagra-demos/merci.html">
         <input type="hidden" name="LeadSource" value="Web">
-
-        <!-- Honeypot anti-bot -->
-        <div class="hp">
-          <label>Si vous êtes humain, laissez ce champ vide</label>
-          <input type="text" name="website">
-        </div>
 
         <div class="row">
           <div>
@@ -213,40 +211,35 @@
           </div>
           <div>
             <label for="Role__c">Rôle dans l’entreprise <span class="req">*</span></label>
-              <input id="Role__c" name="Role__c" type="text" placeholder="Exemple : Directeur Marketing" required>
+            <input id="Role__c" name="Role__c" type="text" placeholder="Exemple : Directeur Marketing" required>
           </div>
         </div>
 
-        <div class="field full">
-          <!-- Projet_Description__c : OBLIGATOIRE (déclenche le Flow) -->
-          <label for="Projet_Description__c">Votre projet <span class="required-star">*</span>
-            <span class="required-badge">(obligatoire)</span>
-          </label>
-          <textarea id="Projet_Description__c" name="Projet_Description__c" rows="6" maxlength="32000" required aria-required="true"
+        <div>
+          <!-- Projet_Description__c : déclencheur -->
+          <label for="Projet_Description__c">Votre projet <span class="req">*</span></label>
+          <textarea id="Projet_Description__c" name="Projet_Description__c" rows="6" maxlength="32000" required
             placeholder="Décrivez brièvement votre projet, vos objectifs et votre contexte…"></textarea>
-          <div class="error" id="err_project">Veuillez décrire brièvement votre projet.</div>
         </div>
 
         <div class="actions">
-          <button class="btn primary" type="submit">Envoyer ma demande</button>
+          <button class="btn" type="submit">Envoyer ma demande</button>
           <button class="btn secondary" type="reset">Effacer</button>
         </div>
       </form>
     </aside>
   </main>
 
-  <!--  Chat Code Snippet - DEBUT  -->
+  <!-- Chat Code Snippet (collez exactement celui de votre org) -->
   <script type='text/javascript'>
     function initEmbeddedMessaging() {
       try {
-        embeddedservice_bootstrap.settings.language = 'fr'; // For example, enter 'en' or 'en-US'
+        embeddedservice_bootstrap.settings.language = 'fr';
         embeddedservice_bootstrap.init(
           '00DgL00000BBAAe',
           'Web_Messaging_Custom',
           'https://orgfarm-ab4c8353cf-dev-ed.develop.my.site.com/ESWWebMessagingCustom1758535912617',
-          {
-            scrt2URL: 'https://orgfarm-ab4c8353cf-dev-ed.develop.my.salesforce-scrt.com'
-          }
+          { scrt2URL: 'https://orgfarm-ab4c8353cf-dev-ed.develop.my.salesforce-scrt.com' }
         );
       } catch (err) {
         console.error('Error loading Embedded Messaging: ', err);
@@ -254,6 +247,5 @@
     };
   </script>
   <script type='text/javascript' src='https://orgfarm-ab4c8353cf-dev-ed.develop.my.site.com/ESWWebMessagingCustom1758535912617/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
-  <!-- FIN -  Chat Code Snippet   -->
 </body>
 </html>
