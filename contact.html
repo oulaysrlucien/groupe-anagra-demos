@@ -121,7 +121,7 @@
   <!-- Lien Retour à l’accueil -->
   <a class="home-link" href="index.html">← Retour à l’accueil</a>
   <!-- Bouton Rafraichissement Chat -->
-<button onclick="resetChat()" style="margin:10px; padding:6px 12px; background:#0176d3; color:#fff; border:none; border-radius:4px;">
+<button id="btnResetChat" style="margin:10px; padding:6px 12px; background:#0176d3; color:#fff; border:none; border-radius:4px;">
   Nouveau Chat
 </button>
 
@@ -255,5 +255,47 @@
     };
   </script>
   <script type='text/javascript' src='https://orgfarm-ab4c8353cf-dev-ed.develop.my.site.com/ESWWebMessagingCustom1758535912617/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
+
+  <!-- Script Reset (s’exécute quand le DOM est prêt) -->
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    function resetChat() {
+      try {
+        // Tente de finir proprement la session (si API dispo)
+        try {
+          if (window.embeddedservice_bootstrap && embeddedservice_bootstrap.liveAgentAPI) {
+            if (typeof embeddedservice_bootstrap.liveAgentAPI.endChat === 'function') {
+              embeddedservice_bootstrap.liveAgentAPI.endChat();
+            }
+          }
+        } catch (e) {}
+
+        // Nettoie le stockage local lié au chat
+        try {
+          const patterns = /(embeddedservice|esw|messaging|bootstrap)/i;
+          Object.keys(localStorage).forEach(k => { if (patterns.test(k)) localStorage.removeItem(k); });
+          Object.keys(sessionStorage).forEach(k => { if (patterns.test(k)) sessionStorage.removeItem(k); });
+          // Pour un reset radical en POC :
+          // localStorage.clear(); sessionStorage.clear();
+        } catch (e) {}
+
+        // Recharge avec cache-buster
+        const url = new URL(window.location.href);
+        url.searchParams.set('t', Date.now().toString());
+        window.location.replace(url.toString());
+      } catch (e) {
+        console.error('Reset chat a échoué : ', e);
+        window.location.reload();
+      }
+    }
+
+    const btn = document.getElementById('btnResetChat');
+    if (btn) btn.addEventListener('click', resetChat);
+  });
+</script>
+
+
+  
 </body>
 </html>
