@@ -5,19 +5,54 @@
   <title>LORYS Autocare</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    :root {
+      --overlay: rgba(0, 27, 54, 0.35); /* ajuste l'opacité ici (0.0 → 1.0) */
+    }
     html, body {
-      margin: 0;
-      height: 100%;
-      overflow: hidden;
+      margin: 0; height: 100%; overflow: hidden;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     }
+    /* Image plein écran */
     body {
-      background-image: url('images/atelierVehicles.jpg');
-      background-size: cover;       /* l’image couvre tout l’écran */
-      background-position: center;  /* centrée */
-      background-repeat: no-repeat; /* pas de répétition */
+      background: url('images/atelierVehicles.jpg') center / cover no-repeat fixed;
+      position: relative;
     }
+    /* Voile (donne l'effet "transparence") */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: var(--overlay);
+      pointer-events: none;
+    }
+
+    /* 2) Lien Home stylé en haut */
+    .home {
+      position: fixed; top: 16px; left: 16px; z-index: 10;
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.28);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      color: #0f172a;
+      font-weight: 600;
+      box-shadow: 0 8px 26px rgba(0,0,0,.15);
+      border: 1px solid rgba(255,255,255,.45);
+      transition: transform .15s ease, background .15s ease;
+    }
+    .home:hover { transform: translateY(-1px); background: rgba(255,255,255,.38); }
+    .home svg { vertical-align: -2px; margin-right: 6px; }
   </style>
 </head>
 <body>
+  <!-- Lien retour Accueil -->
+  <a class="home" href="index.html" aria-label="Retour à l'accueil">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M10 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Accueil
+  </a>
 </body>
 </html>
