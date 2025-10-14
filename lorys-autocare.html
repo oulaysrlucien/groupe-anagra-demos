@@ -2,76 +2,22 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>LORYS Autocare — Démo Agent</title>
+  <title>LORYS Autocare</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    :root { --brand:#001b36; --overlay: rgba(0,27,54,.48); }
-    * { box-sizing: border-box; }
-    html, body { height:100%; margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
-
-    /* Section plein écran avec ton image en fond */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #fff;
-      background-image: url('../images/atelierVehicles.jpg'); /* ← TON IMAGE */
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed; /* effet léger parallax (optionnel) */
+    html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
     }
-    .hero::after { content:""; position:absolute; inset:0; background: var(--overlay); }
-    .content { position: relative; z-index: 1; width: min(1100px, 92vw); }
-
-    .title { margin: 0 0 1rem; font-size: clamp(26px, 4vw, 44px); }
-    .subtitle { margin: 0 auto 1.5rem; max-width: 900px; font-size: clamp(14px, 2.2vw, 18px); opacity: .95; }
-
-    .chatbox {
-      min-height: 520px;
-      background: #ffffff;
-      color: #0f172a;
-      border-radius: 16px;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 10px 30px rgba(0,0,0,.10);
-      padding: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto;
+    body {
+      background-image: url('images/atelierVehicles.jpg');
+      background-size: cover;       /* l’image couvre tout l’écran */
+      background-position: center;  /* centrée */
+      background-repeat: no-repeat; /* pas de répétition */
     }
-    .hint { color: #475569; font-size: 14px; }
-    .cta { display:inline-block; padding:.8rem 1.1rem; border-radius:.75rem; background:#ffffff; color:var(--brand); text-decoration:none; font-weight:600; }
-    .cta:hover { filter: brightness(0.95); }
   </style>
 </head>
 <body>
-  <section class="hero">
-    <div class="content">
-      <p style="text-transform:uppercase; letter-spacing:2px; opacity:.9">Assistant Virtuel Automobile</p>
-      <h1 class="title">LORYS Autocare — Démonstration</h1>
-      <p class="subtitle">Identifiez le véhicule, proposez des créneaux et planifiez un rendez-vous — tout se passe ici avec l’agent LORYS.</p>
-
-      <div class="chatbox" id="lorys-chat-container">
-        <small class="hint">Collez ci-dessous votre snippet Agentforce pour afficher le chatbot LORYS.</small>
-      </div>
-
-      <!-- Remplace cet exemple par TON snippet Agentforce réel
-      <script src="https://example.agentforce.cdn/embed.js" defer></script>
-      <script>
-        window.addEventListener('DOMContentLoaded', () => {
-          window.AgentforceChat.init({
-            container: '#lorys-chat-container',
-            agentId: 'YOUR_AGENT_ID',
-            welcome: 'Bonjour ! Je suis LORYS, votre assistant de service auto.',
-            theme: { primary:'#001b36', accent:'#B3FF66' }
-          });
-        });
-      </script>
-      -->
-    </div>
-  </section>
 </body>
 </html>
