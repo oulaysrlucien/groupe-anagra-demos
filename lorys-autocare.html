@@ -54,5 +54,35 @@
     </svg>
     Accueil
   </a>
-</body>
+
+
+
+  <!--  SNIPET CHAT AGENT  -->
+
+      <script type='text/javascript'>
+        	function initEmbeddedMessaging() {
+        		try {
+        			embeddedservice_bootstrap.settings.language = 'fr'; // For example, enter 'en' or 'en-US'
+        
+        			embeddedservice_bootstrap.init(
+        				'00DgL00000BBAAe',
+        				'Lorys_Web_Messaging',
+        				'https://orgfarm-ab4c8353cf-dev-ed.develop.my.site.com/ESWLorysWebMessaging1760535363130',
+        				{
+        					scrt2URL: 'https://orgfarm-ab4c8353cf-dev-ed.develop.my.salesforce-scrt.com'
+        				}
+        			);
+        		} catch (err) {
+        			console.error('Error loading Embedded Messaging: ', err);
+        		}
+        	};
+</script>
+<script type='text/javascript' src='https://orgfarm-ab4c8353cf-dev-ed.develop.my.site.com/ESWLorysWebMessaging1760535363130/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
+
+  <!-- FIN - SNIPET CHAT AGENT --> 
+
+
+  
+</body>  
 </html>
